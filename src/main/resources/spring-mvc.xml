@@ -8,12 +8,15 @@
     <description>Spring MVC Configuration</description>
     
     <!-- 加载配置属性文件 -->
-	<context:property-placeholder ignore-unresolvable="true" location="classpath:jeesite.properties" />
+	<context:property-placeholder ignore-unresolvable="true" location="classpath:system-config.properties" />
 	
-	<!-- 使用Annotation自动注册Bean,只扫描@Controller -->
-	<context:component-scan base-package="com.thinkgem.jeesite" use-default-filters="false"><!-- base-package 如果多个，用“,”分隔 -->
+	<!-- 使用Annotation自动注册Bean,只扫描@Controller --><!-- base-package 如果多个，用“,”分隔 -->
+ 	<context:component-scan base-package="com.tinet.radius" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-	</context:component-scan>
+	</context:component-scan> 
+	
+<!--    <context:component-scan base-package="com.tinet.radius"/>
+   <mvc:annotation-driven/> -->
     
 	<!-- 默认的注解映射的支持，org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping -->
 	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
@@ -29,7 +32,7 @@
                 </property>
                 <property name="prettyPrint" value="false"/>
                 <property name="objectMapper">  
-                    <bean class="com.thinkgem.jeesite.common.mapper.JsonMapper"></bean>  
+                    <bean class="com.tinet.radius.common.mapper.JsonMapper"></bean>  
                 </property> 
             </bean>
             <!-- 使用XML格式输出数据 -->
@@ -41,10 +44,10 @@
 				        </property>
 				        <property name="annotatedClasses">
 				            <list>
-				                <value>com.thinkgem.jeesite.common.persistence.BaseEntity</value>
-				                <value>com.thinkgem.jeesite.common.supcan.treelist.TreeList</value>
-				                <value>com.thinkgem.jeesite.common.supcan.treelist.cols.Col</value>
-				                <value>com.thinkgem.jeesite.common.supcan.treelist.cols.Group</value>
+				                <value>com.tinet.radius.common.persistence.BaseEntity</value>
+				                <value>com.tinet.radius.common.supcan.treelist.TreeList</value>
+				                <value>com.tinet.radius.common.supcan.treelist.cols.Col</value>
+				                <value>com.tinet.radius.common.supcan.treelist.cols.Group</value>
 				            </list>
 				        </property>
 				    </bean>
@@ -90,12 +93,12 @@
 			<mvc:exclude-mapping path="${adminPath}/sys/menu/tree"/>
 			<mvc:exclude-mapping path="${adminPath}/sys/menu/treeData"/>
 			<mvc:exclude-mapping path="${adminPath}/oa/oaNotify/self/count"/>
-			<bean class="com.thinkgem.jeesite.modules.sys.interceptor.LogInterceptor" />
+			<bean class="com.tinet.radius.modules.sys.interceptor.LogInterceptor"/>
 		</mvc:interceptor>
 		<!-- 手机视图拦截器 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<bean class="com.thinkgem.jeesite.modules.sys.interceptor.MobileInterceptor" />
+			<bean class="com.tinet.radius.modules.sys.interceptor.MobileInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
